@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
-import { UniversalButton } from './microtasks/UniversalButton';
+import { FilteredListComponent } from './microtasks/FilteredListComponent';
 
-type MoneyType = {
+export type MoneyType = {
   banknotes: 'Dollars' | 'RUBLS'
   value: number
   number: string
 }
 
-type FilterNameType = 'All' | 'Dollars' | 'RUBLS'
+export type FilterNameType = 'All' | 'Dollars' | 'RUBLS'
 
 //data
 function App() {
@@ -41,24 +41,7 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <ul>
-        {currentMoney.map((objectFromArray) => {
-          return (
-            <div>
-              <li key={objectFromArray.number}>
-                <span>{objectFromArray.banknotes}</span>
-                <span>{objectFromArray.value}</span>
-                <span>{objectFromArray.number}</span>
-              </li>
-            </div>
-          )
-        })}
-      </ul>
-      <UniversalButton callBack={() => filteredList('All')} title='All' />
-      <UniversalButton callBack={() => filteredList('Dollars')} title='Dollars' />
-      <UniversalButton callBack={() => filteredList('RUBLS')} title='Rubles' />
-    </div>
+    <FilteredListComponent currentMoney={currentMoney} filteredList={filteredList}/>
   );
 }
 
