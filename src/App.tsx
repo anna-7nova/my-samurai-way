@@ -3,51 +3,47 @@ import './App.css';
 import { UniversalButton } from './microtasks/UniversalButton';
 
 type MoneyType = {
-  banknotes: 'Dollars' | 'RUBLS' 
+  banknotes: 'Dollars' | 'RUBLS'
   value: number
-  number: string 
+  number: string
 }
 
+type FilterNameType = 'All' | 'Dollars' | 'RUBLS'
+
 //data
-const allList: Array<MoneyType> = [
-  { banknotes: 'Dollars', value: 100, number: ' a1234567890' },
-  { banknotes: 'Dollars', value: 50, number: ' z1234567890' },
-  { banknotes: 'RUBLS', value: 100, number: ' w1234567890' },
-  { banknotes: 'Dollars', value: 100, number: ' e1234567890' },
-  { banknotes: 'Dollars', value: 50, number: ' c1234567890' },
-  { banknotes: 'RUBLS', value: 100, number: ' r1234567890' },
-  { banknotes: 'Dollars', value: 50, number: ' x1234567890' },
-  { banknotes: 'RUBLS', value: 50, number: ' v1234567890' },
-]
-
 function App() {
-  const [money, setMoney] = useState(allList)
+  const [money, setMoney] = useState<Array<MoneyType>>(
+    [
+      { banknotes: 'Dollars', value: 100, number: ' a1234567890' },
+      { banknotes: 'Dollars', value: 50, number: ' z1234567890' },
+      { banknotes: 'RUBLS', value: 100, number: ' w1234567890' },
+      { banknotes: 'Dollars', value: 100, number: ' e1234567890' },
+      { banknotes: 'Dollars', value: 50, number: ' c1234567890' },
+      { banknotes: 'RUBLS', value: 100, number: ' r1234567890' },
+      { banknotes: 'Dollars', value: 50, number: ' x1234567890' },
+      { banknotes: 'RUBLS', value: 50, number: ' v1234567890' },
+    ]
+  )
 
-  // const [nameOfButton, setNameOfButton] = useState("all")
-  
+  //busines logic
+  const [nameButton, setNameButton] = useState<FilterNameType>("All")
 
-  function filteredButton (title: string) {
-    if (title === 'All') {
-      return (
-        setMoney(allList)
-      )
-    }
-    if (title === 'Dollars') {
-      return (
-        setMoney(allList.filter(filteredMoney => filteredMoney.banknotes === 'Dollars' ))
-      )
-    }
-    if (title === 'RUBLS') {
-      return(
-        setMoney(allList.filter(filteredMoney => filteredMoney.banknotes === 'RUBLS' ))
-      )
-    }
+  let currentMoney = money
+  if (nameButton === 'RUBLS') {
+    currentMoney = money.filter(filteredMoney => filteredMoney.banknotes === 'RUBLS')
+  }
+  if (nameButton === 'Dollars') {
+    currentMoney = money.filter(filteredMoney => filteredMoney.banknotes === 'Dollars')
+  }
+
+  const filteredList = (value: FilterNameType) => {
+    setNameButton(value)
   }
 
   return (
     <div className="App">
       <ul>
-        {money.map((objectFromArray) => {
+        {currentMoney.map((objectFromArray) => {
           return (
             <div>
               <li key={objectFromArray.number}>
@@ -59,9 +55,9 @@ function App() {
           )
         })}
       </ul>
-      <UniversalButton callBack={() => filteredButton('All')} title='All' />
-      <UniversalButton callBack={() => filteredButton('Dollars')} title='Dollars' />
-      <UniversalButton callBack={() => filteredButton('RUBLS')} title='Rubles' />
+      <UniversalButton callBack={() => filteredList('All')} title='All' />
+      <UniversalButton callBack={() => filteredList('Dollars')} title='Dollars' />
+      <UniversalButton callBack={() => filteredList('RUBLS')} title='Rubles' />
     </div>
   );
 }
