@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { FilteredListComponent } from './microtasks/FilteredListComponent';
+import { TaskInput } from './microtasks/TaskInput';
 
 export type MoneyType = {
   banknotes: 'Dollars' | 'RUBLS'
@@ -41,7 +42,11 @@ function App() {
   }
 
   return (
-    <FilteredListComponent currentMoney={currentMoney} filteredList={filteredList}/>
+    <div>
+      <FilteredListComponent currentMoney={currentMoney} filteredList={filteredList} />
+      <hr />
+      <TaskInput />
+    </div>
   );
 }
 
