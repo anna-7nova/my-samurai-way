@@ -1,14 +1,18 @@
 import React, { ChangeEvent, useState } from 'react';
 
-export const Input = () => {
+type InputPropsType = {
+    addNewTitle: (title: string)=> void
+    value: string
+}
+
+export const Input = (props: InputPropsType) => {
     //local state
-    const [title, setTitle] = useState("")
 
 const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.currentTarget.value)
+    props.addNewTitle(event.currentTarget.value)
 }
 
     return (
-        <input onChange={onChangeHandler}/>
+        <input value={props.value} onChange={onChangeHandler}/>
     );
 };

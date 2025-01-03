@@ -12,7 +12,7 @@ export const TaskInput = () => {
             { message: "message3" }
         ]
     )
-
+    //function for universal component - input+button
     const [currentMessage, setCurrentMessage] = useState(message)
 
     const addMessage = (title: string) => {
@@ -22,7 +22,20 @@ export const TaskInput = () => {
         setCurrentMessage([newMessage, ...currentMessage])
     }
 
+    //separate option - separate input and separate button
+    const [currentTitle, setCurrentTitle] = useState("")
     const [currentMessage2, setCurrentMessage2] = useState(message)
+
+    const addNewTitle = (title: string) => {
+        setCurrentTitle(title)
+    }
+    console.log(currentTitle)
+
+    const addNewMessage = (currentTitle: string) => {
+        let newMessage2 = {message: currentTitle}
+        setCurrentMessage2([newMessage2, ...currentMessage2])
+        setCurrentTitle("")
+    }
 
     return (
         <div>
@@ -31,8 +44,8 @@ export const TaskInput = () => {
                 return <div key={index}>{m.message}</div>
             })}
             <hr />
-            <Input/>
-            <InputButton name={"+"} callback={()=>{}}/>
+            <Input value={currentTitle} addNewTitle={addNewTitle}/>
+            <InputButton name={"+"} callback={()=>{addNewMessage(currentTitle)}}/>
             {currentMessage2.map((m, index: number) => {
                 return <div key={index}>{m.message}</div>
             })}
