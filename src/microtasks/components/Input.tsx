@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 
 type InputPropsType = {
-    addNewTitle: (title: string)=> void
+    addNewTitle: (currentTitle: string)=> void
     value: string
 }
 

@@ -8,7 +8,6 @@ type InputButtonPropsType = {
 export const InputButton = (props: InputButtonPropsType) => {
     const onClickHandler = () => {
         props.callback()
-
     }
 
     return (

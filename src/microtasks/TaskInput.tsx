@@ -26,9 +26,6 @@ export const TaskInput = () => {
     const [currentTitle, setCurrentTitle] = useState("")
     const [currentMessage2, setCurrentMessage2] = useState(message)
 
-    const addNewTitle = (title: string) => {
-        setCurrentTitle(title)
-    }
     console.log(currentTitle)
 
     const addNewMessage = (currentTitle: string) => {
@@ -44,7 +41,7 @@ export const TaskInput = () => {
                 return <div key={index}>{m.message}</div>
             })}
             <hr />
-            <Input value={currentTitle} addNewTitle={addNewTitle}/>
+            <Input value={currentTitle} addNewTitle={setCurrentTitle}/>
             <InputButton name={"+"} callback={()=>{addNewMessage(currentTitle)}}/>
             {currentMessage2.map((m, index: number) => {
                 return <div key={index}>{m.message}</div>
